@@ -1,26 +1,14 @@
-// //normal function statement
-function sayHi(){
-    console.log('hi');
-}
+//using this functionality in another app (from count)
 
-sayHi();
+var counter = require('./count'); // ./ to say we want a file in a current dir
+//no need to write js in the end because it will find that js file
 
-// //function expression
-var sayBye = function (){ //this is an anonymous function, setting it equal to a variable.
-console.log('bye');
-};
+//now we've required this module 'count' in app.js
 
-sayBye();
+console.log(counter(['chelsea', 'margie', 'will']));
 
-//
+//error at first because counter method isnt avail outside of count module 
 
-function callFunction (fun) {
-    fun();
-} 
+//when we require another mod it looks in that mod to in the mod.exports property finds it and returns it in the file that its required in and stores it in a variable.
 
-var sayBye = function (){ //this variable is gonna be passed to ^function above
-    console.log('bye');
-};
-    
-callFunction(sayBye);
-
+//variable is then a reference to the function in the mod and it should work in the function in line 7.
