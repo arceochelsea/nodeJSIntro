@@ -1,11 +1,15 @@
 //using this functionality in another app (from count)
 
-var counter = require('./count'); // ./ to say we want a file in a current dir
+var stuff = require('./stuff'); // ./ to say we want a file in a current dir
 //no need to write js in the end because it will find that js file
 
 //now we've required this module 'count' in app.js
 
-console.log(counter(['chelsea', 'margie', 'will']));
+console.log(stuff.counter(['chelsea', 'margie', 'will'])); //this is equal to the counter function in stuff
+
+console.log(stuff.adder(5,6));
+
+console.log(stuff.adder(stuff.pi, 5));
 
 //error at first because counter method isnt avail outside of count module 
 
