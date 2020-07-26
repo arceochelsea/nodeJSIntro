@@ -1,18 +1,36 @@
-//using this functionality in another app (from count)
+//var events = require('events'); //when calling a call module we just need the name
+// //whatever is returned will be stored in the events variable
+// //event emitter to create custom events and react to those events when omitted
 
-var stuff = require('./stuff'); // ./ to say we want a file in a current dir
-//no need to write js in the end because it will find that js file
+// var myEmitter = new events.EventEmitter();
 
-//now we've required this module 'count' in app.js
+// myEmitter.on('someEvent', function(mssg){ //when someevent occurs then we want the call back function to omit 
+//     console.log(mssg);
+// });
 
-console.log(stuff.counter(['chelsea', 'margie', 'will'])); //this is equal to the counter function in stuff
+// myEmitter.emit('someEvent', 'the event was emitted'); //the str is the mssg in the function in line 7
 
-console.log(stuff.adder(5,6));
+//another ex
+var events = require('events');
+var util = require('util'); //util inherits the eventEmitter i think
 
-console.log(stuff.adder(stuff.pi, 5));
+var Person = function (name){
+    this.name = name;
+};
 
-//error at first because counter method isnt avail outside of count module 
+util.inherits(Person, events.EventEmitter); //person will inherit events.EventEmitter
 
-//when we require another mod it looks in that mod to in the mod.exports property finds it and returns it in the file that its required in and stores it in a variable.
+var chelsea = new Person('chelsea');
+var patrick = new Person('patrick');
+var ryu = new Person('ryu');
+var people = [chelsea, patrick, ryu];
 
-//variable is then a reference to the function in the mod and it should work in the function in line 7.
+people.forEach(function(person){
+    person.on('speak', function(mssg){ //were taking whichever person and attaching an event listener, we've inherited the eventemitted onto any object which is created through this construtor "new Person"
+    //attaching a custom event to each person as we go thru the array
+        console.log(person.name + ' said: ' + mssg);
+    });
+});
+
+chelsea.emit('speak', 'yerrrr wasssgood');
+patrick.emit('speak', 'i want ramen');
