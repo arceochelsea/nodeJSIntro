@@ -1,0 +1,23 @@
+Streams and Buffers
+
+Buffers
+
+- temporary storage spot for a chunk of data that is being transferred from one place to another
+
+- the buffer is filled with data, then passed along
+
+- transfer small chunks of data at a time
+
+Stream 
+
+- stream of data that flows over time from one place to another 
+
+THINK about streaming movies!!!!
+
+how one is consuming data or watching the movie before its even finished completely gathering all the data. all the while info/data is still actively buffering 
+
+Streams in Node.js
+
+- can create streams in Node.js to transfer data
+- increase performance
+
