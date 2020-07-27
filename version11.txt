@@ -1,0 +1,28 @@
+Clients and Servers
+
+Protocols 
+- A set of communation rules, that two sides agree to use when communicating 
+
+- Client and server will both use this as a means of communication with one another ("rules" protocols)
+
+- If a client wants to connect to a server then it must first connect to the IP address and it will open a socket between the two computers, basically a channel which info can be sent. info sent is structured via different protocols. ex FTP or Http.
+
+FTP 
+
+- File Transfer Protocol
+
+HTTP 
+
+- used for websites 
+
+- when structure for the info to be sent is decided, info is sent down the socket between two computers via protocol called TCP.
+
+TCP 
+
+- splits up the data in smaller pieces to transfer down the socket. Small pieces/ sections are called packets. 
+
+Ports 
+
+- A program running on a computer can listen for requests sent to a particular port number 
+
+NodeJS will be listening to certain ports in order to know that certain info wants to be passed through.
