@@ -6,15 +6,21 @@
 //alt
 
 const { Router } = require('express');
+
 /*
 @path / localhost:port/user/now/:day/:month?parm1={Boolean}
 @desc /
 @access public
 */
+
 const router = new Router();
+
 //const userSubRouter = express.Router({mergeParams: true});
+
 const userpost = require('./userposts')
+
 //we have to infer the local host part
+//would be localhost:3000/now
 router.get('/now', (req, res) => {
     const {year: y, day: d, month: m} = req.params;
     console.log(y, d, m)
