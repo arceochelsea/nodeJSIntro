@@ -21,6 +21,7 @@ app.use(express.json()); //parse the body from a json format to a js object that
 
 //MIDDLEWARE THAT ALL ROUTES USE (regardless of request-path or HTTP method) '/' 
 app.use(firstMid);
+app.use(express.static('public'))
 
 //USING A ROUTER
 app.use('/', homeRouter); //route branches cause they branch off the main one
