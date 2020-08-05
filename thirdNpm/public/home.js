@@ -15,13 +15,28 @@ window.onload = () => { //does not need a nme because it will only fire once
     //(2)set properties and event listeners
     //id for each element
     mainDiv.id = 'mainDiv';
+    mainDiv.name = 'mainDiv';
+
     heading.id = 'heading';
+    heading.name = 'heading';
+
     form.id = 'form';
+    form.name = 'form';
+
     emailInput.id = 'emailInput';
+    emailInput.name = 'emailInput';
+
     userNameInput.id = 'userNameInput';
+    userNameInput.name = 'userNameInput';
+
     passInput.id = 'passInput';
+    passInput.name = 'pass1';
+
     passConfirmInput.id = 'passConfirmInput';
-    submitButton.id = 'submitButton';    
+    passConfirmInput.name = 'pass2';
+
+    submitButton.id = 'submitButton';
+    submitButton.name = 'submitButton';    
 
     heading.innerText = 'Register Today!!';
 
@@ -33,8 +48,9 @@ window.onload = () => { //does not need a nme because it will only fire once
     passInput.placeholder = 'Enter Password';
     passInput.type = 'password';
 
-    passConfirmInput.placeholder = 'Enter Password';
     passConfirmInput.placeholder = 'Enter Password Again';
+    passConfirmInput.type = 'password';
+
 
     submitButton.innerText = 'Register';
 
@@ -48,18 +64,13 @@ window.onload = () => { //does not need a nme because it will only fire once
     form.appendChild(passInput);
     form.appendChild(passConfirmInput);
 
+
     //classname for the inputs
     let inputs = document.querySelectorAll('input');
     for (const input of inputs) {
         input.classList.add('input');
     //    console.log(inputs);
     } 
-
-    //log the form/elements one by one with the for..in for..of
-    // let forms = document.getElementsByClassName('input');
-    // for (const form of forms) {
-    //     console.log(forms);
-    // }
 
     //set event listener for submit btn, log 'submitting..' to the console, 
     submitButton.addEventListener('click', function(){
@@ -69,4 +80,25 @@ window.onload = () => { //does not need a nme because it will only fire once
         }
     });
 
+    submitButton.onclick = submitReg;
+
+}
+
+function submitReg() { //any object that is iteriable 
+    const formElem = document.getElementById('form');
+    const reqBody = {};
+    for (const input of formElem) {
+        //console.log(input.value);
+        reqBody[input.name] = input.value
+    }
+    console.log(reqBody);
+    const endpoint = location.origin + '/user/post/new';
+    console.log(reqBody);
+    const xhr = new XMLHttpRequest();
+    xhr.open('POST', endpoint);
+    xhr.onload = () => {
+        const res = JSON.parse(xhr.responseText);
+        console.log(res);
+    }
+    xhr.send(JSON.stringify(reqBody));
 }
