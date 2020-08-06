@@ -100,5 +100,8 @@ function submitReg() { //any object that is iteriable
         const res = JSON.parse(xhr.responseText);
         console.log(res);
     }
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
     xhr.send(JSON.stringify(reqBody));
 }
