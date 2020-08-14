@@ -22,7 +22,7 @@ router.get('/login', (req, res) => {
 
 module.exports = router;
 
-//
+// homework from 8/11, didnt connect
 
 router.get('/', function (req, res){
  //   let jsonObj = {message: 'its the bashblinging..flackflinging..'};

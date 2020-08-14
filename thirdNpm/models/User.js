@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UserSchema = new mongoose.Schema({//everytime youre working w/ class you and youre making a new instance you have to write new
+const UserSchema = new mongoose.Schema({//everytime youre working w/ class and youre making a new instance you have to write new
     username: {
         type: String,
         required: true,

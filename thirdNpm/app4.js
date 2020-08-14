@@ -45,18 +45,6 @@ mongoose.connect(URI, mongoOptions, (err) => { //will attempt to connect to data
     console.error('Mongo URI missing or invalid, check node environment variables');
 }
 
-// var Post = require('./models/post')
-// app.post('/api/posts', function (req, res, next) {
-//   var post = new Post({
-//     username: req.body.username,
-//     password: req.body.password,
-//     email: req.body.email
-//   })
-//   post.save(function (err, post) {
-//     if (err) { return next(err) }
-//     res.json(201, post)
-//   })
-// })
 
 //START SERVER LISTENING
 app.listen(port, () => { 
