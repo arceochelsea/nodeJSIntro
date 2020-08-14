@@ -121,6 +121,4 @@ function submitReg() { //any object that is iteriable
     
         xhr.send(JSON.stringify(reqBody));
     }
-    }
-
-   
+    }   
