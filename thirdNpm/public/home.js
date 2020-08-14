@@ -24,16 +24,16 @@ window.onload = () => { //does not need a nme because it will only fire once
     form.name = 'form';
 
     emailInput.id = 'emailInput';
-    emailInput.name = 'emailInput';
+    emailInput.name = 'email';
 
     userNameInput.id = 'userNameInput';
-    userNameInput.name = 'userNameInput';
+    userNameInput.name = 'username';
 
     passInput.id = 'passInput';
-    passInput.name = 'pass1';
+    passInput.name = 'password';
 
     passConfirmInput.id = 'passConfirmInput';
-    passConfirmInput.name = 'pass2';
+    passConfirmInput.name = 'password2';
 
     submitButton.id = 'submitButton';
     submitButton.name = 'submitButton';    
@@ -87,21 +87,40 @@ window.onload = () => { //does not need a nme because it will only fire once
 function submitReg() { //any object that is iteriable 
     const formElem = document.getElementById('form');
     const reqBody = {};
+
     for (const input of formElem) {
         //console.log(input.value);
         reqBody[input.name] = input.value
     }
-    console.log(reqBody);
-    const endpoint = location.origin + '/user/post/new';
-    console.log(reqBody);
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', endpoint);
-    xhr.onload = () => {
-        const res = JSON.parse(xhr.responseText);
-        console.log(res);
+
+    let passedValidation = true;
+
+    if (reqBody.username.length > 33 || reqBody.username.length < 3) {
+        alert('Username must be within the range of 3-33 characters');
+        passedValidation = false;
     }
 
-    xhr.setRequestHeader('Content-Type', 'application/json')
+    if (reqBody.password !== reqBody.password2) {
+        alert('Passwords did not match');
+        passedValidation = false;
+    }
 
-    xhr.send(JSON.stringify(reqBody));
-}
+    if (passedValidation) {
+
+        const endpoint = location.origin + '/user/register';
+
+        //XHR
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', endpoint);
+        xhr.onload = () => {
+            const res = JSON.parse(xhr.responseText);
+            console.log(res);
+        }
+    
+        xhr.setRequestHeader('Content-Type', 'application/json')
+    
+        xhr.send(JSON.stringify(reqBody));
+    }
+    }
+
+   

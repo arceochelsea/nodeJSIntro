@@ -3,6 +3,8 @@
 //router.post
 //
 const express = require('express');
+
+const User = require('../models/User');
 const router = express.Router();
 
 //localhost:3000/now/newUser
