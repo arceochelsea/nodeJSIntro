@@ -19,14 +19,21 @@ app.use(express.static('public'))
 //USING A ROUTER
 app.use('/', homeRouter);
 
-//CONNECTIN TO DATABASE
-    // mongoose.connect(URI, mongoOptions, (err) => { //will attempt to connect to database
-    //     if (err) {
-    //         console.error(`\nError Connecting to MongoDB: ${err.message || err}\n`) //saves the use of an if else statement
-    //     } else {
-    //         console.log('Connected to DB')
-    //     }
-    // })
+if (typeof URI === 'string') {
+    const mongoOptions = { useNewUrIParser: true, useUnifiedTopology: true, useCreateIndex: true }; //standard, should be in all good mongo files
+//CONNECTION TO DATABASE
+mongoose.connect(URI, mongoOptions, (err) => { //will attempt to connect to database
+    if (err) {
+        console.error(`\nError Connecting to MongoDB: ${err.message || err}\n`) //saves the use of an if else statement if value is true use the first condition if not use the next 
+        //err.message may not always be defined, IF UNDEFINED, err obj has more info 
+    } else {
+        console.log('Connected to DB');
+    }
+})
+} else {
+    console.error('Mongo URI missing or invalid, check node environment variables');
+}
+
 
 //START SERVER LISTENING
 app.listen(port, () => { 
