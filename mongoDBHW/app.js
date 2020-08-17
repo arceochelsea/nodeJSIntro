@@ -1,4 +1,5 @@
 //packages 
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -7,17 +8,20 @@ const app = express();
 
 //router
 const homeRouter = require('./routes/homeRouter');
+const userRouter = require('./route/userRouter');
+const UserModel = require('../models/User.js');
 
 //CONSTANTS
 const port = process.env.PORT || 3000;
 const URI = process.env.MONGO;
 
 
-app.use(express.json()); //parse the body from a json format to a js object that is workable in js
+app.use(express.json()); 
 app.use(express.static('public'))
 
 //USING A ROUTER
 app.use('/', homeRouter);
+app.use('/user', userRouter);
 
 if (typeof URI === 'string') {
     const mongoOptions = { useNewUrIParser: true, useUnifiedTopology: true, useCreateIndex: true }; //standard, should be in all good mongo files

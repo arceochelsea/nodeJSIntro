@@ -32,10 +32,8 @@ const UserModel = mongoose.model('user', UserSchema); // we are taking the UserS
 //
 // UserModel.find({/* whatever we're trying to find*/}, function(error, users){
 //     if(error){
-//         console.log('oh jeezzz an error');
 //         console.error(error);
 //     } else {
-//         console.log('the user you are trying to locate is...');
 //         console.log(users);
 //     }
 // }

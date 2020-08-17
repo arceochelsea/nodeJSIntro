@@ -4,27 +4,6 @@ const router = new Router ();
 
 const User = require('../models/User');
 
-router.patch('/login', function(req, res){
-
-    console.log(req.body, 'login test');
-
-    try {
-
-        res.json({message: 'success!'})
-
-    } catch (error) {
-
-        console.error(error.message);
-    
-        res.status(500).json({
-        
-        message: error.message
-
-        })
-    }
-
-})
-
 router.post('/register', async (req, res) => {
 
     console.log(req.body);
