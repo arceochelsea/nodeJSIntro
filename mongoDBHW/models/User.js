@@ -29,5 +29,17 @@ const UserSchema = new mongoose.Schema({
 
 const UserModel = mongoose.model('user', UserSchema); // we are taking the UserSchema and compile it into a model which returns a bunch of methods. So it will take all the information from the schema and new info from the methods we will give it like user.find() etc.
 
+//
+// UserModel.find({/* whatever we're trying to find*/}, function(error, users){
+//     if(error){
+//         console.log('oh jeezzz an error');
+//         console.error(error);
+//     } else {
+//         console.log('the user you are trying to locate is...');
+//         console.log(users);
+//     }
+// }
+
+
 module.exports = UserModel; 
 
