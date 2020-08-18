@@ -40,6 +40,7 @@ const { Router } = require('express');
 const router = new Router ();
 
 const User = require('../models/User');
+//const { db } = require('../models/User'); alternate syntax
 
 // const userPost = require('./userPost.js');
 // router.use('/post', userPost)
@@ -69,12 +70,6 @@ router.post('/register', async (req, res) => {
 
     try {
 
-        /*backend validation
-        []ensure email/username are not dups
-        []check password length
-        [] validate email and username for contriants (before mongoose does for us)
-        */
-
         //old way (deprecated)
 
         // const newUserDoc = new User(req.body); //create an instance of the user model which an instance of this model is just a new document
@@ -91,6 +86,57 @@ router.post('/register', async (req, res) => {
 
         res.status(500).json({
             message: error.message
+        })
+    }
+})
+
+//@path: LH/user/all
+//@desp: fetch all user data in the data, do not include sensitive info 
+//@access: public
+
+router.get('/all', async (req, res) => { 
+   // db.collection('users').find()
+
+    try {
+       
+        const allUsers = await User.find({}) //same as above!! await makes it async
+
+        console.log(allUsers);
+
+        res.json(allUsers) //can send objs or arrays
+
+        } catch (err) {
+            const msg = err.message || err;
+            console.error(msg) //if this is undefined use the err on the right of the OR 
+            res.status(500).json({
+                message: msg
+            })
+        }
+
+    }   
+)
+//@path: LH/user/username/:username
+//@desp: fetch all user data in the data, do not include sensitive info 
+//@access: public
+
+router.get('/username/:username', async (req, res) => {
+
+    try {
+        //const foundUser = await User.findOne( {username: req.params.username} ) //req.body is more than one value from the client, req.params is extracting one piece of info from the client, req.query are for few pieces of info but they are optional!
+
+        const query = {username: req.params.username};
+
+        const projection = { email: 1, username: 1, _id: 0}; //id will be included unless specifically said not to include
+
+        const foundUser = await User.findOne( query, projection );
+
+        res.json(foundUser);
+
+    } catch (err) {
+        const msg = err.message || err;
+        console.error(msg) //if this is undefined use the err on the right of the OR 
+        res.status(500).json({
+            message: msg
         })
     }
 })

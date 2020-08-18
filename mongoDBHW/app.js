@@ -1,5 +1,6 @@
+require('dotenv').config()
+
 //packages 
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 
@@ -8,8 +9,8 @@ const app = express();
 
 //router
 const homeRouter = require('./routes/homeRouter');
-const userRouter = require('./route/userRouter');
-const UserModel = require('../models/User.js');
+const userRouter = require('./routes/userRouter');
+const UserModel = require('./models/User.js');
 
 //CONSTANTS
 const port = process.env.PORT || 3000;
