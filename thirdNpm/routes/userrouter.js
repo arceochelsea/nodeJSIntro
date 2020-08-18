@@ -91,7 +91,7 @@ router.post('/register', async (req, res) => {
 })
 
 //@path: LH/user/all
-//@desp: fetch all user data in the data, do not include sensitive info 
+//@desp: fetch all user data from the database, do not include sensitive info 
 //@access: public
 
 router.get('/all', async (req, res) => { 
@@ -116,7 +116,7 @@ router.get('/all', async (req, res) => {
     }   
 )
 //@path: LH/user/username/:username
-//@desp: fetch all user data in the data, do not include sensitive info 
+//@desp: fetch one user data from the database, do not include sensitive info 
 //@access: public
 
 router.get('/username/:username', async (req, res) => {
