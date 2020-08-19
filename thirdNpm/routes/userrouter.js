@@ -146,7 +146,35 @@ router.get('/username/:username', async (req, res) => {
 //put /updateinfo/:id *uses req.body to pass modifying values of user
 //what do we want to update, how is that info being passed to the REST api?
 
-//router.put
+router.put('/update/:id', findUser, async (req, res) => {
+
+    try {
+
+        //await User.findById(req.userId);
+
+        //get updated info from req.body
+
+        //const updatedUser = await User.findOneAndUpdated(req.userId);
+
+
+
+        //Ninja.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}).then(function(ninja){
+//     res.send(ninja);
+// });
+        await User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}).then((user) => {
+                res.json({user})
+            })
+    
+    } catch (err) {
+        const msg = err.message || err;
+        console.error(msg) //if this is undefined use the err on the right of the OR 
+        res.status(500).json({
+            message: msg
+        })
+    }
+
+})
+
 
 //delete /delete/:id ( mongodb document id )
 router.delete('/delete/:id', findUser, async (req, res) => {
