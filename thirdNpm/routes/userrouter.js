@@ -42,6 +42,8 @@ const router = new Router ();
 const User = require('../models/User');
 //const { db } = require('../models/User'); alternate syntax
 
+const findUser = require('../middleware/findUser');
+
 // const userPost = require('./userPost.js');
 // router.use('/post', userPost)
 router.patch('/login', (req, res) => {
@@ -138,6 +140,30 @@ router.get('/username/:username', async (req, res) => {
         res.status(500).json({
             message: msg
         })
+    }
+})
+
+//put /updateinfo/:id *uses req.body to pass modifying values of user
+//what do we want to update, how is that info being passed to the REST api?
+
+//router.put
+
+//delete /delete/:id ( mongodb document id )
+router.delete('/delete/:id', findUser, async (req, res) => {
+
+    try {
+
+        await User.findByIdAndDelete(req.userId);
+
+        res.send('Deleted User!')
+
+    } catch (err) {
+        const msg = err.message || err;
+        console.error(msg);
+        res.status(500).json({
+            message: msg
+        })
+
     }
 })
 
