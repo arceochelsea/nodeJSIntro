@@ -150,14 +150,6 @@ router.put('/update/:id', findUser, async (req, res) => {
 
     try {
 
-        //await User.findById(req.userId);
-
-        //get updated info from req.body
-
-        //const updatedUser = await User.findOneAndUpdated(req.userId);
-
-
-
         //Ninja.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}).then(function(ninja){
 //     res.send(ninja);
 // });
