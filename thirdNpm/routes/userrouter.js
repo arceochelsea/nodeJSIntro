@@ -102,7 +102,7 @@ router.get('/all', async (req, res) => {
     try {
        
         const allUsers = await User.find({}) //same as above!! await makes it async
-
+        
         console.log(allUsers);
 
         res.json(allUsers) //can send objs or arrays
@@ -114,7 +114,6 @@ router.get('/all', async (req, res) => {
                 message: msg
             })
         }
-
     }   
 )
 //@path: LH/user/username/:username
@@ -129,6 +128,8 @@ router.get('/username/:username', async (req, res) => {
         const query = {username: req.params.username};
 
         const projection = { email: 1, username: 1, _id: 0}; //id will be included unless specifically said not to include
+        // fakeobj = { username, pass, favMovie: 1, firstName, lastName: 1}
+        // fakeprojectionobj = {favMovie: 0}
 
         const foundUser = await User.findOne( query, projection );
 
@@ -153,9 +154,9 @@ router.put('/update/:id', findUser, async (req, res) => {
         //Ninja.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}).then(function(ninja){
 //     res.send(ninja);
 // });
-        await User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}).then((user) => {
-                res.json({user})
-            })
+    let updatedUser = await User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}) 
+        res.json({updatedUser})
+        
     
     } catch (err) {
         const msg = err.message || err;
@@ -173,7 +174,7 @@ router.delete('/delete/:id', findUser, async (req, res) => {
 
     try {
 
-        await User.findByIdAndDelete(req.userId);
+        await User.findByIdAndDelete(req.userId); //req.req.params.id????
 
         res.send('Deleted User!')
 
