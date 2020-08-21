@@ -31,7 +31,7 @@ app.use('/', homeRouter); //route branches cause they branch off the main one
 app.use('/user', userRouter);
 
 if (typeof URI === 'string') {
-    const mongoOptions = { useNewUrIParser: true, useUnifiedTopology: true, useCreateIndex: true }; //standard, should be in all good mongo files
+    const mongoOptions = { useNewUrIParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: true}; //standard, should be in all good mongo files
 //CONNECTION TO DATABASE
 mongoose.connect(URI, mongoOptions, (err) => { //will attempt to connect to database
     if (err) {

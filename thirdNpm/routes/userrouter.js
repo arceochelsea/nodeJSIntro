@@ -146,6 +146,9 @@ router.get('/username/:username', async (req, res) => {
 
 //put /updateinfo/:id *uses req.body to pass modifying values of user
 //what do we want to update, how is that info being passed to the REST api?
+//@path: LH/user/update/:id
+//@desp: fetch one user data from the database, do not include sensitive info 
+//@access: public
 
 router.put('/update/:id', findUser, async (req, res) => {
 
@@ -157,7 +160,6 @@ router.put('/update/:id', findUser, async (req, res) => {
     let updatedUser = await User.findByIdAndUpdate({_id: req.params.id}, req.body, {new: true}) 
         res.json({updatedUser})
         
-    
     } catch (err) {
         const msg = err.message || err;
         console.error(msg) //if this is undefined use the err on the right of the OR 
