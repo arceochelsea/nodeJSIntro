@@ -73,6 +73,12 @@ function submitNew() {
     const xhr = new XMLHttpRequest();
     xhr.open('PUT', endpoint);
     xhr.onload = () => {
-        
+        const res = JSON.parse(xhr.responseText);
+        console.log(res);
     }
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    xhr.send(JSON.stringify(reqBody));
+    
 }
