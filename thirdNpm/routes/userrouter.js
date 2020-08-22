@@ -186,9 +186,9 @@ router.delete('/delete/:id', findUser, async (req, res) => {
         res.status(500).json({
             message: msg
         })
-
     }
 })
+
 
 //make viewable to other files
 module.exports = router;

@@ -20,6 +20,13 @@ router.get('/login', (req, res) => {
     res.sendFile(filePath);
 });
 
+router.get('/update', (req, res) => {
+
+    const filePath = process.cwd() + '/public/update.html';
+
+    res.sendFile(filePath);
+})
+
 module.exports = router;
 
 // homework from 8/11, didnt connect
