@@ -32,11 +32,11 @@ if (typeof(URIMongo) === 'string') {
 
 //routes
 const homeRouter = require('./routes/homeRouter');
-//const userRouter = require('./routes/userRouter');
+const userRouter = require('./routes/userRouter');
 
 //using routers
 app.use('/', homeRouter); //homeRouter is not NOT A PATH, you are requiring a file with an HTTP req 
-//app.use('/profile', userRouter);
+app.use('/profile', userRouter);
 
 app.listen(port, function(){
     console.log(`We are now listening to port: ${port}.`)
