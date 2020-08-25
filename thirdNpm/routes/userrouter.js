@@ -3,36 +3,7 @@
 
 // //router = new express.Router();
 
-// //alt
-
-// const { Router } = require('express');
-
-// const router = new Router();
-
-// //const userSubRouter = express.Router({mergeParams: true});
-
-// const userpost = require('./userPosts')
-
-// //we have to infer the local host part
-// //would be localhost:3000/now
-// router.get('/now', (req, res) => {
-//     const {year: y, day: d, month: m} = req.params;
-//     console.log(y, d, m)
-//     let date = new Date(y,d,m);
-//     res.send(date);
-// })
-
-// router.use('/post', userpost)
-// //import user router for posting
-// //least one route handle for a post request
-// //endpoint expected is localhost:port/user/post/newUser
-// //it'll accept the post method
-
-// //create a subrouter for posting users
-
-// module.exports = router;
-
-
+// //alt to ^^ lines
 //
 
 const { Router } = require('express');
@@ -176,7 +147,7 @@ router.delete('/delete/:id', findUser, async (req, res) => {
 
     try {
 
-        await User.findByIdAndDelete(req.userId); //req.req.params.id????
+        await User.findByIdAndDelete(req.userId); 
 
         res.send('Deleted User!')
 
@@ -189,6 +160,23 @@ router.delete('/delete/:id', findUser, async (req, res) => {
     }
 })
 
+router.put('/update-email/:email', async (req, res) => {
+
+    try {
+
+    let updatedUser = await User.findOneAndUpdate({email: req.params.email}, req.body, {new: true}) 
+        console.log(updatedUser);
+        res.json({updatedUser})
+        
+    } catch (err) {
+        const msg = err.message || err;
+        console.error(msg) //if this is undefined use the err on the right of the OR 
+        res.status(500).json({
+            message: msg
+        })
+    }
+
+})
 
 //make viewable to other files
 module.exports = router;

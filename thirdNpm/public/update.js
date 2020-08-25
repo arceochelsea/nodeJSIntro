@@ -2,9 +2,11 @@ window.onload = () => {
     const mainDiv = document.createElement('div');
     const heading = document.createElement('h1');
     const form = document.createElement('form');
+    const idInput = document.createElement('input');
     const usernameInput = document.createElement('input');
     const emailInput = document.createElement('input');
     const passInput = document.createElement('input');
+    const passValidate = document.createElement('input');
     const submitBtn = document.createElement('button');
 
     mainDiv.id = 'mainDiv';
@@ -16,6 +18,11 @@ window.onload = () => {
 
     form.id = 'form';
     form.name = 'form';
+
+    idInput.id = 'idInput';
+    idInput.name = 'idInput';
+    idInput.placeholder = 'Enter ID Number';
+    idInput.type = 'text';
 
     usernameInput.id = 'usernameInput';
     usernameInput.name = 'usernameInput';
@@ -29,8 +36,13 @@ window.onload = () => {
 
     passInput.id = 'passInput';
     passInput.name = 'passInput';
-    passInput.placeholder = 'Enter Previous Password';
+    passInput.placeholder = 'Enter Password';
     passInput.type = 'password';
+
+    passValidate.id = 'passValidate';
+    passValidate.name = 'passValidate';
+    passValidate.placeholder = 'Re-enter Password';
+    passValidate.type = 'password';
 
     submitBtn.id = 'submitBtn';
     submitBtn.name = 'submitBtn';
@@ -40,9 +52,11 @@ window.onload = () => {
     mainDiv.appendChild(heading);
     mainDiv.appendChild(form);
     mainDiv.appendChild(submitBtn);
+    form.appendChild(idInput);
     form.appendChild(usernameInput);
     form.appendChild(emailInput);
     form.appendChild(passInput);
+    form.appendChild(passValidate);
 
     let inputs = document.querySelectorAll('input');
     for (const input of inputs) {
@@ -65,16 +79,21 @@ function submitNew() {
     const formElem = document.getElementById('form');
     const reqBody = {};
     for (const input of formElem) {
-        reqBody[input.name] = input.value
+        if (input.value === '') {
+            //reqBody[input.name] = input.value
+            alert('must put something in empty fields');
+        } else {
+            reqBody[input.name] = input.value    
+        }
     }
 
-    const endpoint = location.origin + '/user/update';
+    const endpoint = `${location.origin}/user/update/${formElem.idInput.value}`
 
     const xhr = new XMLHttpRequest();
     xhr.open('PUT', endpoint);
     xhr.onload = () => {
         const res = JSON.parse(xhr.responseText);
-        console.log(res);
+        console.log(`this is the res: ${res}`);
     }
 
     xhr.setRequestHeader('Content-Type', 'application/json')
