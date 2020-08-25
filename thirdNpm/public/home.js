@@ -25,12 +25,17 @@ window.onload = () => { //does not need a nme because it will only fire once
 
     emailInput.id = 'emailInput';
     emailInput.name = 'email';
+    emailInput.minLength = 6;
+    emailInput.maxLength = 200;
 
     userNameInput.id = 'userNameInput';
     userNameInput.name = 'username';
+    userNameInput.minLength = 3;
+    userNameInput.maxLength = 33;
 
     passInput.id = 'passInput';
     passInput.name = 'password';
+    passInput.minLength = 7;
 
     passConfirmInput.id = 'passConfirmInput';
     passConfirmInput.name = 'password2';
@@ -104,6 +109,17 @@ function submitReg() { //any object that is iteriable
         alert('Passwords did not match');
         passedValidation = false;
     }
+
+   // const formElem = document.getElementById('form');
+   // const reqBody = {};
+    const userEmail = formElem.emailInput.value.trim();
+    if (userEmail == '') {
+        return alert('Please provide an email address');
+    } else if (userEmail.length < 6) {
+        return alert('Email must be in proper format');
+    }
+
+//    console.log('email passes test');
 
     if (passedValidation) {
 
