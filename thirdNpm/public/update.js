@@ -28,6 +28,8 @@ window.onload = () => {
     usernameInput.name = 'usernameInput';
     usernameInput.placeholder = 'Enter Valid Username';
     usernameInput.type = 'text';
+    usernameInput.minLength = 3;
+    usernameInput.maxLength = 33;
 
     emailInput.id = 'emailInput';
     emailInput.name = 'emailInput';
@@ -38,6 +40,7 @@ window.onload = () => {
     passInput.name = 'passInput';
     passInput.placeholder = 'Enter Password';
     passInput.type = 'password';
+    passInput.minLength = 7;
 
     passValidate.id = 'passValidate';
     passValidate.name = 'passValidate';
@@ -78,13 +81,25 @@ window.onload = () => {
 function submitNew() {
     const formElem = document.getElementById('form');
     const reqBody = {};
+    const userId = formElem.idInput.value.trim()
+    if (userId == '') {
+        return alert('Must provide user ID');
+    } else if (userId.length != 24) {
+        return alert('Id must be in proper format');    
+    }
+
+    console.log('passes id test');
+
     for (const input of formElem) {
-        if (input.value === '') {
-            //reqBody[input.name] = input.value
-            alert('must put something in empty fields');
-        } else {
-            reqBody[input.name] = input.value    
+            const val = input.value.trim();
+            if (val != '' && input.name != 'id') { //only add non-empty values and excludes id from the req body
+                reqBody[input.name] = val
+                return alert('You must fill in empty fields!!');
+            }
         }
+
+    if (Object.keys(reqBody).length == 0) {
+        return alert('One input must be filled');
     }
 
     const endpoint = `${location.origin}/user/update/${formElem.idInput.value}`
