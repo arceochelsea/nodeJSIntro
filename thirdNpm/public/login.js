@@ -23,11 +23,14 @@ window.onload = () => {
     emailInput.name = 'emailInput';
     emailInput.placeholder = 'Enter Email';
     emailInput.type = 'email';
+    emailInput.minLength = 6;
+    emailInput.maxLength = 200;
 
     passInput.id = 'passInput';
     passInput.name = 'passInput';
     passInput.placeholder = 'Enter Password';
     passInput.type = 'password';
+    passInput.minLength = 7;
 
     submitButton.id = 'submitButton';
     submitButton.name = 'submitButton';
@@ -65,8 +68,23 @@ function submitReg() { //any object that is iteriable
     const reqBody = {}; //this is where request body will go
     for (const input of formElem) {
         //console.log(input.value);
-        reqBody[input.name] = input.value
+        reqBody[input.name] = input.value.trim();
     }
+
+    const email = reqBody.emailInput;
+
+    if (email.length < 6 || email.length > 200 || !email.includes('@') || !email.substring(email.indexOf('@')).includes('.')) {
+        alert('Please enter valid email address!')
+        passedValidation = false;
+    }
+
+    const password = reqBody.passInput;
+
+    if (password.length < 7) {
+        alert('Password did not meet requirements');
+        passedValidation = false;
+    }
+
     //console.log(reqBody);
     const endpoint = location.origin + '/user/login';
     //console.log(reqBody);

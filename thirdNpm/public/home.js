@@ -95,7 +95,7 @@ function submitReg() { //any object that is iteriable
 
     for (const input of formElem) {
         //console.log(input.value);
-        reqBody[input.name] = input.value
+        reqBody[input.name] = input.value.trim();
     }
 
     let passedValidation = true;
@@ -105,19 +105,35 @@ function submitReg() { //any object that is iteriable
         passedValidation = false;
     }
 
+    if (reqBody.password.length < 7) {
+        alert('Password did not meet requirements');
+        passedValidation = false;
+    }
+
     if (reqBody.password !== reqBody.password2) {
         alert('Passwords did not match');
         passedValidation = false;
     }
 
+    const email = reqBody.email;
+
+    if (email.length < 6 
+        || email.length > 200 
+        || !email.includes('@') //does not account for multi @
+        || !email.substring(email.indexOf('@')).includes('.') // does not account for multi .
+        ) {
+            alert('Please enter valid email address!')
+            passedValidation = false;
+        }
+
    // const formElem = document.getElementById('form');
    // const reqBody = {};
-    const userEmail = formElem.emailInput.value.trim();
-    if (userEmail == '') {
-        return alert('Please provide an email address');
-    } else if (userEmail.length < 6) {
-        return alert('Email must be in proper format');
-    }
+    // const userEmail = formElem.emailInput.value.trim();
+    // if (userEmail == '') {
+    //     return alert('Please provide an email address');
+    // } else if (userEmail.length < 6) {
+    //     return alert('Email must be in proper format');
+    // }
 
 //    console.log('email passes test');
 

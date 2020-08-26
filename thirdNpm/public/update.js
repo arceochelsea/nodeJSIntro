@@ -90,6 +90,9 @@ function submitNew() {
 
     console.log('passes id test');
 
+    const nonIdInputsFilled = 0;
+
+    //building the req body
     for (const input of formElem) {
             const val = input.value.trim();
             if (val != '' && input.name != 'id') { //only add non-empty values and excludes id from the req body
@@ -98,8 +101,12 @@ function submitNew() {
             }
         }
 
-    if (Object.keys(reqBody).length == 0) {
-        return alert('One input must be filled');
+    // if (Object.keys(reqBody).length == 0) {
+    //     return alert('One input must be filled');
+    // }
+
+    if (nonIdInputsFilled == 0) {
+        return alert('One input must be filled')
     }
 
     const endpoint = `${location.origin}/user/update/${formElem.idInput.value}`

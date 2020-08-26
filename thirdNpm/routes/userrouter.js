@@ -43,10 +43,13 @@ router.post('/register', async (req, res) => {
 
     try {
 
+        //backend validation
+        //ensure email/username are not dups
+        //check password length
+        //validate email and username for constriants (before mongoose does for us)
+
         //old way (deprecated)
-
         // const newUserDoc = new User(req.body); //create an instance of the user model which an instance of this model is just a new document
-
         // await newUserDoc.save(); //saves it to database; dont move on to the next line of code the operation to the right completes
 
         //new way (preferred)
