@@ -41,12 +41,62 @@ router.patch('/login', (req, res) => {
 router.post('/register', async (req, res) => {
     console.log(req.body);
 
+    const { email: e, username: u, password: p} = req.body; //body destructuring our target is req.body
+    
+    if (e === undefined || e === undefined || p === undefined) {
+        return res.status(400).json({
+            message: 'Fields missing needed to create account'
+        })
+    } //this ensure that these values EXIST 
+
+    /*
+    const email = req.body.email;
+    const username = req.body.username;
+    const password = req.body.password;
+    */
+
+    // const e = req.body.email;
+
+    //     if (e === undefined) {
+    //         e = 'default email'
+    //     }
+
+    // const u = req.body.username === undefined ? 'default username' : req.body.username ;
+
     try {
 
         //backend validation
-        //ensure email/username are not dups
+        //*ensure email/username are not dups
         //check password length
         //validate email and username for constriants (before mongoose does for us)
+ 
+/* beginning of backend validation
+        const validationErrors = [];
+
+        const emailExist = User.findOne({email: e}) !== null;//findone will indicate if there is nothing by telling you its NULL
+
+        const usernameExist = User.findOne({username: u}) !== null;
+
+        if (!emailExist || !usernameExist) {
+            const data = [];
+            if (emailExist) validationErrors.push({key: 'email', error: 'Email In Use'})
+            if (usernameExist) validationErrors.push({key: 'username', error: 'Username In Use'})
+
+            if(p.length < 7) validationErrors.push({key: 'password', error: 'Password Did Not Meet Requirements'})
+
+            //if this array has more than 0 elems res with 400 and res with the array of errors
+
+            // return res.status(409).json({
+
+            //     message: 'data already in use',
+            //     data: data
+            // })
+        }
+ end of backend validation so far*/
+
+
+        //if pw length is off
+            //return res msg: 'pw length wrong'
 
         //old way (deprecated)
         // const newUserDoc = new User(req.body); //create an instance of the user model which an instance of this model is just a new document
