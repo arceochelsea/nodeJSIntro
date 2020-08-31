@@ -42,7 +42,7 @@ window.onload = () => {
     favMovieInput.type = 'text';
 
     idNum.placeholder = 'Enter ID Number';
-    idNum.type = 'text';
+    idNum.type = 'number';
 
 
     submitButton.innerText = 'Submit';
@@ -93,14 +93,14 @@ function submitReg() {
         passedValidation = false;
     }
 
-    if (idNum.length > 6 || idNum.length < 6) {
+    if (idNum.length !== 6) {
         alert('ID number must be 6 numbers');
         passedValidation = false;
     }
 
     if (passedValidation) {
 
-        const endpoint = location.origin + '/user/favmovie';
+        const endpoint = location.origin + '/user/profile';
 
         //XHR
         const xhr = new XMLHttpRequest();

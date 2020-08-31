@@ -2,8 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-//
-//bug for post req??? not submitting to client side
+const User = require('./models/User');
 
 router.post('/profile', async (req, res) => {
 
