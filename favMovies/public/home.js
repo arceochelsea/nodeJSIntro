@@ -80,6 +80,7 @@ window.onload = () => {
 function submitReg() { 
     const formElem = document.getElementById('form');
     const reqBody = {};
+    //let id = idNum.value;
 
     for (const input of formElem) {
         //console.log(input.value);
@@ -93,8 +94,9 @@ function submitReg() {
         passedValidation = false;
     }
 
-    if (idNum.length !== 6) {
+    if (idNum.value !== 6) { // must be fixed
         alert('ID number must be 6 numbers');
+        console.log(`user id is ${id} and the length is ${id.length}`); // must be fixed
         passedValidation = false;
     }
 
