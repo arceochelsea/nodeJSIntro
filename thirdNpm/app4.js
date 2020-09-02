@@ -6,7 +6,8 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 
 //MIDDLES
-const firstMid = require('./middleware/firstMiddleware');
+//const firstMid = require('./middleware/firstMiddleware');
+
 
 //ROUTERS
 const homeRouter = require('./routes/homeRouter');
@@ -24,7 +25,7 @@ const app = express();
 app.use(express.json()); //parse the body from a json format to a js object that is workable in js
 
 //MIDDLEWARE THAT ALL ROUTES USE (regardless of request-path or HTTP method) '/' 
-app.use(firstMid);
+//app.use(firstMid);
 app.use(express.static('public'))
 app.use(morgan('dev'));
 
