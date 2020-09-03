@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-const User = require('./models/User');
+const User = require('../models/User'); //vs . which means youre starting in the cwd
 
-router.post('/profile', async (req, res) => {
+router.post('/', async (req, res) => { //changed path from /profile/profile because profile is already implied
 
     console.log(req.body);
 
@@ -41,3 +41,5 @@ router.get('/all', async (req, res) => {
         })
     }
 })
+
+module.exports = router;

@@ -55,4 +55,3 @@ module.exports = async (req, res, next) => { //NEXT BC IT IS A MIDDDLEWARE
                 })
             }
         }
-        

@@ -25,10 +25,10 @@ window.onload = () => {
     emailInput.name = 'email';
 
     favMovieInput.id = 'favMovieInput';
-    favMovieInput.name = 'favMovieInput';
+    favMovieInput.name = 'favMovie'; //has to match schema
 
     idNum.id = 'idNum';
-    idNum.name = 'idNum';
+    idNum.name = 'id'; //has to match schema
 
     submitButton.id = 'submitButton';
     submitButton.name = 'submitButton';    
@@ -84,34 +84,34 @@ function submitReg() {
 
     for (const input of formElem) {
         //console.log(input.value);
-        reqBody[input.name] = input.value
+        reqBody[input.name] = input.value //reqbody is orginially empty but then input name takes in input value which is what the user provides! ex email(input.name): testing@test.com(input.value)
     }
 
-    let passedValidation = true;
+   // let passedValidation = true;
 
-    if (favMovieInput.length > 33 || favMovieInput.length < 3) {
-        alert('favorite movie must be within the range of 3-33 characters');
-        passedValidation = false;
-    }
+    // if (favMovieInput.length > 33 || favMovieInput.length < 3) {
+    //     alert('favorite movie must be within the range of 3-33 characters');
+    //     passedValidation = false;
+    // }
 
-    if (idNum.value !== 6) { // must be fixed
-        alert('ID number must be 6 numbers');
-        console.log(`user id is ${id} and the length is ${id.length}`); // must be fixed
-        passedValidation = false;
-    }
+    // if (id.length !== 6) { // must be fixed
+    //     alert('ID number must be 6 numbers');
+    //     console.log(`user id is ${id} and the length is ${id.length}`); // must be fixed
+    //     passedValidation = false;
+    // }
 
-    if (passedValidation) {
+  //  if (passedValidation) {
 
-        const endpoint = location.origin + '/user/profile';
+        const endpoint = location.origin + '/profile'; //this is path from app.js accessible to all userrouter stuff 
 
-        //XHR
+        console.log('hello world');
         const xhr = new XMLHttpRequest();
         xhr.open('POST', endpoint);
             xhr.onload = () => {
             const res = JSON.parse(xhr.responseText);
             console.log(res);
             }
-        xhr.setRequestHeader('Content-Type', 'application/json')
-        xhr.send(JSON.stringify(reqBody));
-    }
+        xhr.setRequestHeader('Content-Type', 'application/json') //does not automatically accept json data, we must set it ourselves for post req
+        xhr.send(JSON.stringify(reqBody)); //this ultimately sends it to server side
+  //  }
 }   
