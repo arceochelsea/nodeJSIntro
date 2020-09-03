@@ -42,4 +42,4 @@ router.get('/all', async (req, res) => {
     }
 })
 
-module.exports = router;
+module.exports = router; //MAKE SURE TO ALWAYS INCLUDE THIS!!!!
