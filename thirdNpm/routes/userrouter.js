@@ -15,10 +15,15 @@ const User = require('../models/User');
 
 const findUser = require('../middleware/findUser');
 const validateReg = require('../middleware/validateRegister');
+const passEncrypt = require('../middleware/passEncrypt');
 
 // const userPost = require('./userPost.js');
 // router.use('/post', userPost)
-router.patch('/login', (req, res) => {
+router.patch('/login', 
+//check user credentials, make sure they match whats in the DB
+//create a Json web tokens 
+//send the JSON to the FE
+(req, res) => {
 
     console.log(req.body, 'login test');
 
@@ -39,13 +44,14 @@ router.patch('/login', (req, res) => {
 //@desp: make a new user document and stores their info to the database
 //@access: public
 
-router.post('/register', validateReg, async (req, res) => {
+router.post('/register', validateReg, passEncrypt, async (req, res) => {
 
     try {
 
-        await User.create(req.body); //line above is done in one line here
+        //req.newUser is defined n the validateReq middleware and passed to the function
+        await User.create(req.newUser);
 
-        res.json(201).json({message: 'success!'});
+        res.status(201).json({message: 'success!'});
 
     } catch (error) {
 

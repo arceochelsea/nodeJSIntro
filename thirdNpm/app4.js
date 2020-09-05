@@ -4,6 +4,7 @@ require('dotenv').config()
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
+const bcrypt = require('bcrypt');
 
 //MIDDLES
 //const firstMid = require('./middleware/firstMiddleware');

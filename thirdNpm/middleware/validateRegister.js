@@ -35,8 +35,7 @@ module.exports = async (req, res, next) => { //NEXT BC IT IS A MIDDDLEWARE
 
         if (p === undefined || p.trim().length === 0) { 
             validationErrors.push({key: 'password', error: 'Password Required'}) 
-        } else {
-            (p != undefined && p.length < 7)//checks the length of the password
+        } else if (p != undefined && p.length < 7) {//checks the length of the password
             validationErrors.push({key: 'password', error: 'Password Did Not Meet Requirements'});
         }
     
@@ -45,10 +44,34 @@ module.exports = async (req, res, next) => { //NEXT BC IT IS A MIDDDLEWARE
                         validationErrors: validationErrors
                     })  
                 } else {
+
+                    //sanitize individual fields 
+
+                    const username = u.trim(), email = e.trim(), password = p.trim();
+
+                    //1) create new object, only include the fields we need (user, email, password)
+
+                    sanitizedData = {
+                        username: username,
+                        email: email,
+                        password: password
+                    }
+
+                    req.newUser = sanitizedData;
+
+                    //2) remove unneeded/security risking fields
+
+                    //its defined on our frontend form
+                    // delete req.body.password2
+
+                    // //could possibly be sent via postman
+                    // delete req.body.emailValidated
+
                     next()
                 }
 
             } catch (error) {
+                console.log(error.stack)
                 res.status(500).json({
                     message: error.message ||'Unknown Error',
                     error: error

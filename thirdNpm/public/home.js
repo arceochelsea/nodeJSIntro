@@ -146,7 +146,33 @@ function submitReg() { //any object that is iteriable
         xhr.open('POST', endpoint);
         xhr.onload = () => {
             const res = JSON.parse(xhr.responseText);
-            console.log(res);
+
+            if (xhr.status === 201) {
+
+                alert('Your Account Was Created Successfully')
+
+            } else if (xhr.status === 400 && res.validationErrors != undefined) {
+                //1
+                // const errMsg = res.validationErrors.map( err => {
+                //     console.log(err.key);
+                //     return `Error with ${err.key}: ${err.error}`;
+                // }).join('\n')
+
+                //2
+                let errMsg = '';
+
+                for (let i = 0; i < res.validationErrors.length; i++) {
+                    const err = res.validationErrors[i];
+
+                    errMsg += `Error with ${err.key}: ${err.error}\n`
+                }
+
+                console.log(errMsg);
+
+                alert()
+            } else {
+                alert('Unknown Server Error Occurred');
+            }
         }
     
         xhr.setRequestHeader('Content-Type', 'application/json')
