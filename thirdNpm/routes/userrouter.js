@@ -16,24 +16,22 @@ const User = require('../models/User');
 const findUser = require('../middleware/findUser');
 const validateReg = require('../middleware/validateRegister');
 const passEncrypt = require('../middleware/passEncrypt');
+const checkUserCred = require('../middleware/checkUserCred');
+const createJWT = require('../middleware/createJWT');
 
 // const userPost = require('./userPost.js');
 // router.use('/post', userPost)
-router.patch('/login', 
-//check user credentials, make sure they match whats in the DB
-//create a Json web tokens 
-//send the JSON to the FE
-(req, res) => {
+router.patch('/login', checkUserCred, createJWT, (req, res) => {
 
     console.log(req.body, 'login test');
 
     try {
 
-        res.json({message: 'success!'})
+        res.json({token: req.createJWT})
 
-    }catch (error) {
+    } catch (error) {
+        
         console.error(error.message);
-
         res.status(500).json({
             message: error.message
         })
