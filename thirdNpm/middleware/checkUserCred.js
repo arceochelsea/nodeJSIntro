@@ -17,7 +17,7 @@ module.exports = async (req, res, next) => {
         const p = password.trim();
         const c = credential.trim();
 
-        //first is the user logging in with their email or their username
+        //first is the user logging in with their email or their username?
         const field = validate.isEmail(c) ? 'email' : 'username';
 
         //if email, check if email is in use
@@ -33,19 +33,15 @@ module.exports = async (req, res, next) => {
         }
 
         //if they do exist, check the password 
-
         const passwordMatches = bcrypt.compare(p, foundUser.password); //returns a boolean true if pw matches
 
         //if pass matches, then go to the next middleware, otherwise send a general message 'failed login'
-
         if (!passwordMatches) {
             return res.status(400).json({message: 'Credentials Do Not Match'})
         }
 
         //at this point we have confirmed the user's creds match and they can be logged in
-
         req.userId = foundUser._id;
-        
 
         next ()
 
